@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block page_title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<main class="flex-1 p-8 overflow-y-auto">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white p-8 rounded-2xl subtle-shadow">
+            <!-- Cabeçalho do Perfil -->
+            <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b">
+                <img src="https://placehold.co/96x96/E2E8F0/475569?text=AS" alt="Foto do Perfil" class="w-24 h-24 rounded-full ring-4 ring-blue-100">
+                <div class="text-center sm:text-left">
+                    <h2 class="text-3xl font-bold text-gray-800">Ana Silva</h2>
+                    <p class="text-primary-blue font-semibold mt-1">Desenvolvedora Frontend Pleno</p>
+                    <p class="text-sm text-gray-500 mt-1 flex items-center justify-center sm:justify-start gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i>São Paulo, Brasil</p>
+                </div>
+                <div class="sm:ml-auto">
+                     <!-- CORREÇÃO: Link para perfil público (deixado como '#' por enquanto, pois não há rota) -->
+                     <a href="#" class="bg-slate-100 text-slate-800 font-semibold py-2 px-4 rounded-lg hover:bg-slate-200 transition-colors text-sm">Ver Perfil Público</a>
+                </div>
+            </div>
+
+            <!-- Formulário de Edição -->
+            <form action="#" method="POST" class="mt-8 space-y-8">
+                {% csrf_token %} <!-- Adicionado token CSRF -->
+                <!-- Informações Pessoais -->
+                <div>
+                    <h3 class="text-lg font-bold text-gray-700">Informações Pessoais</h3>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="fullname" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+                            <input type="text" id="fullname" value="Ana Silva" class="mt-1 block w-full form-input">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" value="ana.silva@email.com" class="mt-1 block w-full form-input bg-slate-50" readonly>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Telefone</label>
+                            <input type="tel" id="phone" value="(11) 98765-4321" class="mt-1 block w-full form-input">
+                        </div>
+                        <div>
+                            <label for="linkedin" class="block text-sm font-medium text-gray-700">Perfil LinkedIn</label>
+                            <input type="url" id="linkedin" value="https://linkedin.com/in/anasilva" class="mt-1 block w-full form-input">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sobre Mim -->
+                <div>
+                     <h3 class="text-lg font-bold text-gray-700">Sobre Mim</h3>
+                     <textarea rows="4" class="mt-2 block w-full form-input">Desenvolvedora apaixonada por criar interfaces intuitivas e acessíveis. Tenho 5 anos de experiência com o ecossistema JavaScript, focando em performance e na melhor experiência do utilizador.</textarea>
+                </div>
+
+                <!-- Meu Currículo -->
+                <div>
+                     <h3 class="text-lg font-bold text-gray-700">Meu Currículo</h3>
+                     <div class="mt-2 flex justify-center rounded-lg border-2 border-dashed border-gray-300 px-6 py-10">
+                        <div class="text-center">
+                            <i data-lucide="upload-cloud" class="mx-auto h-12 w-12 text-gray-400"></i>
+                            <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-primary-blue

@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %} <!-- Adicionado o load static -->
+
+{% block title %}Dashboard do Candidato | TalentMatch!{% endblock %}
+
+{% block page_title %}Dashboard{% endblock %} <!-- Adicionado o page_title -->
+
+{% block content %}
+<main class="flex-1 p-8 overflow-y-auto"> <!-- Movido o 'main' para dentro do 'content' -->
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">Bem-vinda de volta, Ana!</h2>
+        <p class="text-gray-500 mt-1">Aqui está um resumo da sua atividade e oportunidades.</p>
+    </div>
+
+    <!-- Grid Principal do Dashboard -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Coluna Principal (Esquerda) -->
+        <div class="lg:col-span-2 space-y-8">
+            <!-- Gráfico de Atividade -->
+            <div class="bg-white p-6 rounded-2xl subtle-shadow">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Atividade de Candidaturas</h3>
+                <div class="h-64">
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Vagas Recomendadas para Você -->
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Vagas Recomendadas para Você</h3>
+                <div class="space-y-4">
+                    <!-- Card de Vaga Recomendada -->
+                    <div class="bg-white p-4 rounded-2xl subtle-shadow flex items-center justify-between hover:shadow-lg transition-shadow">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/50x50/2E5BFF/FFFFFF?text=TS" alt="Logo da Empresa" class="rounded-lg">
+                            <div>
+                                <p class="font-bold text-gray-800">Desenvolvedor Frontend Pleno</p>
+                                <p class="text-sm text-gray-500">TechSolutions | Remoto</p>
+                            </div>
+                        </div>
+                        <!-- CORREÇÃO: Link de exemplo para detalhe da vaga -->
+                        <a href="{% url 'detalhe_vaga' id=1 %}" class="bg-primary-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-dark-blue transition-colors text-sm">Ver Vaga</a>
+                    </div>
+                    <!-- Card de Vaga Recomendada -->
+                     <div class="bg-white p-4 rounded-2xl subtle-shadow flex items-center justify-between hover:shadow-lg transition-shadow">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/50x50/9333ea/FFFFFF?text=CM" alt="Logo da Empresa" class="rounded-lg">
+                            <div>
+                                <p class="font-bold text-gray-800">Designer UX/UI</p>
+                                <p class="text-sm text-gray-500">Creative Minds | Híbrido</p>
+                            </div>
+                        </div>
+                        <!-- CORREÇÃO: Link de exemplo para detalhe da vaga -->
+                        <a href="{% url 'detalhe_vaga' id=2 %}" class="bg-primary-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-dark-blue transition-colors text-sm">Ver Vaga</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Lateral (Direita) -->
+        <div class="space-y-8">
+            <!-- Progresso do Perfil -->
+            <div class="bg-white p-6 rounded-2xl subtle-shadow">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Força do Perfil</h3>
+                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                    <div class="bg-primary-blue h-2.5 rounded-full" style="width: 75%"></div>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">Seu perfil está 75% completo.</p>
+                <!-- CORREÇÃO: Link para a página de perfil -->
+                <a href="{% url 'perfil_candidato' %}" class="mt-4 block text-center w-full bg-slate-100 text-slate-800 font-semibold py-2.5 px-4 rounded-lg hover:bg-slate-200 transition-colors">
+                    Completar Perfil
+                </a>
+            </div>
+            
+            <!-- Empresas Interessadas -->
+            <div class="bg-white p-6 rounded-2xl subtle-shadow">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Empresas que viram seu perfil</h3>
+                <div class="space-y-4">
+                     <!-- Empresa -->
+                    <div class="flex items-center gap-3">
+                        <img src="https://placehold.co/40x40/f59e0b/FFFFFF?text=DA" alt="Logo da Empresa" class="rounded-full">
+                        <div>
+                            <p class="font-semibold text-gray-700">Data Analytics Inc.</p>
+                            <p class="text-xs text-gray-500">Viu seu perfil há 2 dias</p>
+                        </div>
+                    </div>
+                     <!-- Empresa -->
+                     <div class="flex items-center gap-3">
+                        <img src="https://placehold.co/40x40/22c55e/FFFFFF?text=SS" alt="Logo da Empresa" class="rounded-full">
+                        <div>
+                            <p class="font-semibold text-gray-700">Soluções Sustentáveis</p>
+                            <p class="text-xs text-gray-500">Viu seu perfil hoje</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Configuração do Gráfico de Atividade
+    // Garante que o script só rode depois que o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const ctx = document.getElementById('activityChart');
+        if (ctx) { // Verifica se o elemento canvas existe
+            new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['4 Semanas Atrás', '3 Semanas Atrás', '2 Semanas Atrás', 'Semana Passada', 'Esta Semana'],
+                    datasets: [{
+                        label: 'Candidaturas Enviadas',
+                        data: [2, 5, 3, 7, 4],
+                        backgroundColor: 'rgba(46, 91, 255, 0.1)',
+                        borderColor: '#2E5BFF',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0 // Garante que o eixo Y não tenha casas decimais
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | TalentMatch!</title>
+    
+    <!-- CSS Estático (o mesmo styles.css principal) -->
+    <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    
+    <!-- Scripts e Fontes Externas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Cores personalizadas do Tailwind para o seu projeto */
+        .bg-primary-blue { background-color: #2E5BFF; }
+        .text-primary-blue { color: #2E5BFF; }
+        .hover\:bg-primary-dark-blue:hover { background-color: #254ad6; } /* Um tom mais escuro para o hover */
+        .border-primary-blue { border-color: #2E5BFF; }
+        .focus\:ring-primary-blue:focus { --tw-ring-color: #2E5BFF; }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Cabeçalho (similar ao do Login) -->
+    <header class="w-full bg-primary-blue shadow-md z-10">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-code"><path d="M15.5 15.5 19 19"/><path d="m2 11 4 4-4 4"/><path d="m12 2 4 4-4 4"/><circle cx="11" cy="11" r="8"/></svg>
+                <span class="text-2xl font-bold text-white">TalentMatch!</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- CORREÇÃO: Links apontando para as rotas de login e 'cadastrar_vaga' (que é sua página de cadastro/aplicação) -->
+                <a href="{% url 'login' %}" class="text-white font-semibold py-2 px-5 rounded-lg text-sm border border-white hover:bg-white hover:text-primary-blue transition-colors">
+                    Cadastrar
+                </a>
+                <a href="{% url 'login' %}" class="bg-white text-primary-blue font-semibold py-2 px-5 rounded-lg text-sm">
+                    Entrar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção Principal - Hero -->
+    <main class="flex-1">
+        <section class="py-20 text-center bg-gray-50">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <span class="inline-block bg-blue-100 text-primary-blue text-xs font-semibold px-3 py-1 rounded-full mb-4">Powered by IA</span>
+                <h1 class="text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                    Conecte Talentos com<br>
+                    Oportunidades de Forma <span class="text-primary-blue">Inteligente</span>
+                </h1>
+                <p class="text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
+                    Nossa plataforma usa inteligência artificial para fazer o match perfeito entre candidatos qualificados
+                    e empresas locais, oferecendo orientação de carreira personalizada e trilhas de aprendizado.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <!-- CORREÇÃO: Links apontando para as rotas corretas -->
+                    <a href="{% url 'explorar_vagas' %}" class="bg-primary-blue text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-primary-dark-blue transition-colors">Procure Vagas!</a>
+                    <a href="{% url 'dashboard_empresa' %}" class="border border-primary-blue text-primary-blue font-semibold py-3 px-8 rounded-lg text-lg hover:bg-blue-50 transition-colors">Procure Talentos!</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Últimas Vagas Publicadas -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Últimas Vagas Publicadas</h2>
+                <p class="text-lg text-gray-600 mb-12">Oportunidades recentes esperando por você. Encontre o seu match perfeito!</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card de Vaga 1 -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-left border border-gray-200 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="flex items-center justify-center w-12 h-12 bg-blue-500 text-white text-xl font-bold rounded-full mr-4">TS</span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Desenvolvedor Frontend Pleno</h3>
+                                <p class="text-sm text-gray-500">TechSolutions</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-5 text-sm">Estamos buscando um desenvolvedor Frontend com experiência em React e TypeScript para se juntar à nossa equipe inovadora.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Remoto</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Pleno</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">React</span>
+                        </div>
+                        <!-- CORREÇÃO: Link de exemplo para detalhe da vaga -->
+                        <a href="{% url 'detalhe_vaga' id=1 %}" class="w-full block text-center bg-blue-50 text-primary-blue font-semibold py-3 px-4 rounded-lg hover:bg-blue-100 transition-colors">Ver Detalhes</a>
+                    </div>
+
+                    <!-- Card de Vaga 2 -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-left border border-gray-200 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="flex items-center justify-center w-12 h-12 bg-purple-500 text-white text-xl font-bold rounded-full mr-4">CM</span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Analista de Marketing Digital</h3>
+                                <p class="text-sm text-gray-500">Conecta Marketing</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-5 text-sm">Procuramos um profissional de marketing para gerenciar campanhas de SEO/SEM, mídias sociais e email marketing.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Híbrido</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Júnior</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Marketing</span>
+                        </div>
+                        <!-- CORREÇÃO: Link de exemplo para detalhe da vaga -->
+                        <a href="{% url 'detalhe_vaga' id=2 %}" class="w-full block text-center bg-blue-50 text-primary-blue font-semibold py-3 px-4 rounded-lg hover:bg-blue-100 transition-colors">Ver Detalhes</a>
+                    </div>
+
+                    <!-- Card de Vaga 3 -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-left border border-gray-200 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="flex items-center justify-center w-12 h-12 bg-orange-500 text-white text-xl font-bold rounded-full mr-4">DA</span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Engenheiro de Dados Sênior</h3>
+                                <p class="text-sm text-gray-500">Data Analytics Inc.</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-5 text-sm">Buscamos um engenheiro de dados experiente para projetar e construir pipelines de dados escaláveis em nosso ambiente cloud.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Remoto</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Sênior</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Python</span>
+                        </div>
+                        <!-- CORREÇÃO: Link de exemplo para detalhe da vaga -->
+                        <a href="{% url 'detalhe_vaga' id=3 %}" class="w-full block text-center bg-blue-50 text-primary-blue font-semibold py-3 px-4 rounded-lg hover:bg-blue-100 transition-colors">Ver Detalhes</a>
+                    </div>
+                </div>
+                
+                <div class="mt-12">
+                    <!-- CORREÇÃO: Link para explorar todas as vagas -->
+                    <a href="{% url 'explorar_vagas' %}" class="border border-gray-300 text-gray-700 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-50 transition-colors">Ver todas as vagas</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Call to Action - Inferior -->
+        <section class="bg-primary-blue py-20 text-center">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-bold text-white mb-6">Pronto para dar o próximo passo?</h2>
+                <p class="text-lg text-blue-100 mb-10">
+                    Seja você um talento à procura da sua próxima oportunidade ou uma empresa à procura da
+                    pessoa certa, a sua jornada começa aqui.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <!-- CORREÇÃO: Links para login/cadastro -->
+                    <a href="{% url 'login' %}" class="bg-white text-primary-blue font-semibold py-3 px-8 rounded-lg text-lg hover:bg-blue-100 transition-colors">Criar Conta de Candidato</a>
+                    <a href="{% url 'login' %}" class="border border-white text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-blue-700 transition-colors">Publicar Uma Vaga</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-gray-400 py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 TalentMatch. Todos os direitos reservados.</p>
+            <p class="text-sm mt-1">Sua plataforma de recrutamento inteligente.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
